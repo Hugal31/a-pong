@@ -19,7 +19,7 @@ impl<'s> System<'s> for GravitySystem {
     );
 
     fn run(&mut self, (gravity, time, mut velocities): Self::SystemData) {
-        for (velocity) in (&mut velocities).join() {
+        for velocity in (&mut velocities).join() {
             let linear = velocity.value.linear().clone();
             velocity.value.set_linear(Vector2::new(linear.x, linear.y + gravity.0 * time.delta_seconds));
         }
