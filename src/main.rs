@@ -1,12 +1,11 @@
 extern crate amethyst;
 extern crate amethyst_rhusics;
 extern crate fern;
-#[macro_use]
 extern crate log;
 
+extern crate a_pong;
+
 mod logger;
-mod pong;
-mod systems;
 
 use amethyst::prelude::*;
 use amethyst::input::InputBundle;
@@ -15,6 +14,7 @@ use amethyst::renderer::{ALPHA, ColorMask,
                          DisplayConfig,
                          DrawSprite, Pipeline,
                          RenderBundle, Stage};
+use amethyst_rhusics::DefaultPhysicsBundle2;
 
 fn main() -> Result<(), amethyst::Error> {
     logger::start_logger(Default::default());
@@ -43,12 +43,10 @@ fn main() -> Result<(), amethyst::Error> {
                      .with_sprite_sheet_processor())?
         .with_bundle(TransformBundle::new())?
         .with_bundle(input_bundle)?
-        .with_bundle(amethyst_rhusics::DefaultPhysicsBundle2::<()>::new())?
-        .with(systems::PaddleSystem, "paddle_system", &["input_system"])
-        .with(systems::GravitySystem, "gravity_system", &[])
-        .with(systems::CapSpeedSystem::default(), "cap_speed_system", &["paddle_system", "gravity_system"]);
+        .with_bundle(DefaultPhysicsBundle2::<()>::new())?
+        .with_bundle(a_pong::PongBundle)?;
 
-    let mut game = Application::build("./resources", pong::Pong)?
+    let mut game = Application::build("./resources", a_pong::StartState)?
         .build(game_data)?;
     game.run();
     Ok(())
