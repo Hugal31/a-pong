@@ -1,0 +1,9 @@
+(
+  axes: {
+    "vertical_left_paddle": Emulated(pos: Key(W), neg: Key(S)),
+    "rotation_left_paddle": Emulated(pos: Key(A), neg: Key(D)),
+    "vertical_right_paddle": Emulated(pos: Key(Up), neg: Key(Down)),
+    "rotation_right_paddle": Emulated(pos: Key(Left), neg: Key(Right)),
+  },
+  actions: {},
+)

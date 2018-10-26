@@ -1,0 +1,13 @@
+[package]
+name = "a-pong"
+version = "0.1.0"
+authors = []
+
+[dependencies]
+amethyst = { version = "0.9", features = ["nightly"] }
+amethyst-rhusics = "0.3.1"
+fern = "0.5"
+log = "0.4"
+
+[patch.crates-io]
+amethyst-rhusics = { version = "0.3.1", path = "../amethyst-rhusics" }
